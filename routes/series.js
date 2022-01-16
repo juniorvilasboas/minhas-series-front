@@ -3,7 +3,13 @@ const seriesController = require('../controllers/series')
 
 const router = express.Router()
 
-router.get('/', seriesController.index)
-router.get('/nova', seriesController.nova)
+const Serie = require('../models/serie')
+const models = {
+  Serie
+}
+
+router.get('/', seriesController.index.bind(null, models))
+router.get('/nova', seriesController.novaForm)
+router.post('/nova', seriesController.novaProcess.bind(null, models))
 
 module.exports = router
